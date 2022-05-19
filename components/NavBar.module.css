@@ -1,0 +1,14 @@
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.link {
+  padding: 0 4px;
+  text-transform: uppercase;
+}
+
+.active {
+  color: tomato;
+}
