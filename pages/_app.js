@@ -1,18 +1,11 @@
-import NavBar from "../components/NavBar";
+import Layout from "../components/Layout";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <NavBar />
-      <span className="hello">NEXT INTRO</span>
+    <Layout>
       <Component {...pageProps} />
-      <style jsx global>{`
-        .hello {
-          font-weight: bold;
-        }
-      `}</style>
-    </>
+    </Layout>
   );
 }
 
