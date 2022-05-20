@@ -2,18 +2,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Seo from "../components/Seo";
 
-export default function Home() {
-  const [movies, setMovies] = useState();
-  useEffect(() => {
-    (async () => {
-      const { results } = await (await fetch(`/api/movies`)).json();
-      setMovies(results);
-    })();
-  }, []);
+export default function Home({ movies }) {
   return (
     <div className="container">
       <Seo title="Home" />
-      {!movies && <h4>Loading...</h4>}
       {movies?.map((movie) => (
         <div className="movie" key={movie.id}>
           <Image src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="" width={500} height={750} />
@@ -43,4 +35,11 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { results } = await (await fetch(`${context.req.headers.referer}/api/movies`)).json();
+  return {
+    props: { movies: results },
+  };
 }
